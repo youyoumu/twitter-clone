@@ -5,6 +5,8 @@ class CreateUserLikes < ActiveRecord::Migration[7.1]
       t.integer :like
 
       t.timestamps
+
+      t.index %i[user_id like], unique: true
     end
   end
 end
