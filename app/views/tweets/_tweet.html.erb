@@ -1,4 +1,13 @@
 <div>
   <p> <%= tweet.user.email %></p>
   <p> <%= tweet.content %></p>
+  <p> Like count: <%= tweet.likers.count %></p>
+  <%= form_with url: "/likes", model: tweet, local: true, method: :post do |f|%>
+    <%= f.hidden_field :id, value: tweet.id %>
+    <%= f.submit "Like" %>
+  <% end %>
+  <%= form_with url: "/likes", model: tweet, local: true, method: :delete do |f|%>
+    <%= f.hidden_field :id, value: tweet.id %>
+    <%= f.submit "Unlike" %>
+  <% end %>
 </div>
