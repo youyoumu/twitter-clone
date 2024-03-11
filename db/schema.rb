@@ -28,6 +28,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_11_062604) do
     t.integer "following"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id", "following"], name: "index_user_followings_on_user_id_and_following", unique: true
     t.index ["user_id"], name: "index_user_followings_on_user_id"
   end
 
@@ -36,6 +37,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_11_062604) do
     t.integer "like"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id", "like"], name: "index_user_likes_on_user_id_and_like", unique: true
     t.index ["user_id"], name: "index_user_likes_on_user_id"
   end
 
