@@ -21,7 +21,6 @@ class Tweet < ApplicationRecord
   accepts_nested_attributes_for :parent
 
   def parent_attributes=(attrs)
-    debugger
     self.parent = Tweet.find_by!(id: attrs[:id])
   rescue ActiveRecord::RecordNotFound
     # nothing
