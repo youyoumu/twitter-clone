@@ -17,11 +17,12 @@ class TweetsController < ApplicationController
 
   def show
     @tweet = Tweet.find(params[:id])
+    @tweet_reply = Tweet.new
   end
 
   private
 
   def tweet_params
-    params.require(:tweet).permit(:content)
+    params.require(:tweet).permit(:content, parent_attributes: [:id])
   end
 end

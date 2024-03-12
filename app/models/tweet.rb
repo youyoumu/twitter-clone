@@ -17,4 +17,13 @@ class Tweet < ApplicationRecord
   has_many :likers, through: :user_likes, source: :user
 
   validates :content, presence: true, length: { minimum: 1 }
+
+  accepts_nested_attributes_for :parent
+
+  def parent_attributes=(attrs)
+    debugger
+    self.parent = Tweet.find_by!(id: attrs[:id])
+  rescue ActiveRecord::RecordNotFound
+    # nothing
+  end
 end

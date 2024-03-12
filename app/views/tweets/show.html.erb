@@ -1,2 +1,7 @@
 <h1>Tweet show</h1>
+<% unless @tweet.parent.nil? %>
+  <p>replied to:</p>
+  <%= render  partial: "tweet", locals: {tweet: @tweet.parent} %>
+<% end %>
 <%= render  partial: "tweet", locals: {tweet: @tweet} %>
+<%= render  partial: "tweet_reply_form", locals: {tweet: @tweet_reply, parent: @tweet} %>
