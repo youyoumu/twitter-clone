@@ -19,4 +19,6 @@ class User < ApplicationRecord
 
   has_many :user_likes
   has_many :likes, through: :user_likes, source: :tweet
+  has_many :user_followings
+  has_many :followings, through: :user_followings, source: :following
 end

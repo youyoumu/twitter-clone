@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :users
   resources :tweets
   resource :likes, only: %i[create destroy]
+  resource :follows, only: %i[create destroy]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

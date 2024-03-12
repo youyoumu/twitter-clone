@@ -1,5 +1,5 @@
 <div>
-  <p> <%= tweet.user.email %></p>
+  <%= link_to tweet.user.email, user_path(tweet.user) %>
   <p> <%= tweet.content %></p>
   <p> Like count: <%= tweet.likers.count %></p>
   <%= form_with url: "/likes", model: tweet, local: true, method: :post do |f|%>
