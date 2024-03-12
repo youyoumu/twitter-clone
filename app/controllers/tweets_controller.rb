@@ -1,6 +1,7 @@
 class TweetsController < ApplicationController
   def index
-    @tweets = Tweet.all
+    @tweets = Tweet.all.includes(:user)
+    @likes_count = UserLike.group(:like).count
     @tweet = Tweet.new
   end
 
