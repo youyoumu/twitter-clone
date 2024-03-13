@@ -16,6 +16,11 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  validates :username, uniqueness: { case_sensitive: false },
+                       length: { minimum: 4, maximum: 15 },
+                       format: { with: /\A[a-zA-Z0-9_]+\z/,
+                                 message: 'can only contain letters, numbers, and underscores' },
+                       presence: true
 
   has_many :user_likes
   has_many :likes, through: :user_likes, source: :tweet
