@@ -19,6 +19,7 @@ class TweetsController < ApplicationController
   def show
     @tweet = Tweet.find(params[:id])
     @tweet_reply = Tweet.new
+    @likes_count = UserLike.where(like: @tweet).group(:like).count
   end
 
   private
