@@ -1,7 +1,7 @@
 <div>
   <%= link_to tweet.user.email, user_path(tweet.user) %>
   <p> <%= tweet.content %></p>
-  <p> <%= link_to 'Like', tweet_like_path(tweet) %> count: <%= likes_count[tweet.id].nil? ? 0 : likes_count[tweet.id] %></p>
+  <div><%= link_to 'Like', tweet_like_path(tweet) %> count: <%= likes_count[tweet.id].nil? ? 0 : likes_count[tweet.id] %></div>
   <%= form_with url: tweet_like_path(tweet), model: tweet, local: true, method: :post do |f|%>
     <%= f.submit "Like" %>
   <% end %>
