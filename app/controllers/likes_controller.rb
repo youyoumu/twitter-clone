@@ -8,5 +8,7 @@ class LikesController < ApplicationController
     current_user.likes.delete(Tweet.find(params[:tweet_id]))
   end
 
-  def show; end
+  def show
+    @tweet = Tweet.find(params[:tweet_id])
+  end
 end
