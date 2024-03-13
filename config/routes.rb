@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :users do
-    resource :follows, only: %i[create destroy]
+    resource :follow, only: %i[create destroy]
   end
   resources :tweets do
     resource :like, only: %i[create destroy show]

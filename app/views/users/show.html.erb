@@ -4,9 +4,9 @@
 <% if current_user.followings.include?(@user) %>
   <p>following</p>
 <% end %>
-<%= form_with url: user_follows_path(@user), model: @user, local: true, method: :post do |f|%>
+<%= form_with url: user_follow_path(@user), model: @user, local: true, method: :post do |f|%>
   <%= f.submit "Follow" %>
 <% end %>
-<%= form_with url: user_follows_path(@user), model: @user, local: true, method: :delete do |f|%>
+<%= form_with url: user_follow_path(@user), model: @user, local: true, method: :delete do |f|%>
   <%= f.submit "Unfollow" %>
 <% end %>
