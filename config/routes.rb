@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resource :follows, only: %i[create destroy]
   end
   resources :tweets do
-    resource :likes, only: %i[create destroy show]
+    resource :like, only: %i[create destroy show]
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

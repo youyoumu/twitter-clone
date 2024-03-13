@@ -3,5 +3,5 @@
   <p>replied to:</p>
   <%= render  partial: "tweet", locals: {tweet: @tweet.parent} %>
 <% end %>
-<%= render  partial: "tweet", locals: {tweet: @tweet} %>
+<%= render  partial: "tweet", locals: {tweet: @tweet, likes_count: @likes_count} %>
 <%= render  partial: "tweet_reply_form", locals: {tweet: @tweet_reply, parent: @tweet} %>
