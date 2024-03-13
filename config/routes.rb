@@ -2,11 +2,12 @@ Rails.application.routes.draw do
   root to: 'tweets#index'
 
   devise_for :users
-  resources :users
+  resources :users do
+    resource :follows, only: %i[create destroy]
+  end
   resources :tweets do
     resource :likes, only: %i[create destroy show]
   end
-  resource :follows, only: %i[create destroy]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
