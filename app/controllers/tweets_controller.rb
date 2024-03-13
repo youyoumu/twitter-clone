@@ -12,7 +12,7 @@ class TweetsController < ApplicationController
     if @tweet.save
       redirect_to tweet_path(@tweet)
     else
-      render :index, status: :unprocessable_entity
+      redirect_to root_path, status: :unprocessable_entity
     end
   end
 

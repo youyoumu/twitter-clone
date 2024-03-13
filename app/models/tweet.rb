@@ -16,7 +16,7 @@ class Tweet < ApplicationRecord
   has_many :user_likes, foreign_key: 'like'
   has_many :likers, through: :user_likes, source: :user
 
-  validates :content, presence: true, length: { minimum: 1 }
+  validates :content, presence: true, length: { minimum: 1, maximum: 280 }
 
   accepts_nested_attributes_for :parent
 
