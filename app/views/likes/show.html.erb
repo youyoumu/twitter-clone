@@ -1,4 +1,4 @@
 <h1>Tweet Likers</h1>
 <% @tweet.likers.each do |liker| %>
-  <div><%= link_to liker.email, user_path(liker) %></div>
+  <div><%= link_to liker.username, user_path(liker) %></div>
 <% end %>
