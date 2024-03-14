@@ -1,9 +1,11 @@
 <h1>User show</h1>
 <p>User id: <%= @user.id %></p>
 <p>User username: <%= @user.username %></p>
-<% if current_user.followings.include?(@user) %>
-  <p>following</p>
+<% if current_user.following.include?(@user) %>
+  <p>Following</p>
 <% end %>
+<%= link_to 'Following', user_following_path(@user) %>
+<%= link_to 'Followers', user_followers_path(@user) %>
 <%= form_with url: user_follow_path(@user), model: @user, local: true, method: :post do |f|%>
   <%= f.submit "Follow" %>
 <% end %>

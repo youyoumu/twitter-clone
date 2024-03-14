@@ -24,6 +24,8 @@ class User < ApplicationRecord
 
   has_many :user_likes
   has_many :likes, through: :user_likes, source: :tweet
-  has_many :user_followings
-  has_many :followings, through: :user_followings, source: :following
+  has_many :following_relationships, class_name: 'UserFollowing', foreign_key: 'user_id'
+  has_many :followers_relationships, class_name: 'UserFollowing', foreign_key: 'following'
+  has_many :following, through: :following_relationships, source: :following
+  has_many :followers, through: :followers_relationships, source: :user, foreign_key: 'following'
 end

@@ -1,3 +1,4 @@
 {
-    "sorbet.enabled": true
+    "sorbet.enabled": true,
+    "codeium.enableCodeLens": false
 }

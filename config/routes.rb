@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users do
     resource :follow, only: %i[create destroy]
+    resource :following, only: [:show]
+    resource :followers, only: [:show]
   end
   resources :tweets do
     resource :like, only: %i[create destroy show]
