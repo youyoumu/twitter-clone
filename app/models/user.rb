@@ -28,4 +28,5 @@ class User < ApplicationRecord
   has_many :followers_relationships, class_name: 'UserFollowing', foreign_key: 'following'
   has_many :following, through: :following_relationships, source: :following
   has_many :followers, through: :followers_relationships, source: :user, foreign_key: 'following'
+  has_many :tweets
 end

@@ -12,3 +12,7 @@
 <%= form_with url: user_follow_path(@user), model: @user, local: true, method: :delete do |f|%>
   <%= f.submit "Unfollow" %>
 <% end %>
+<% unless @user.tweets.nil? %>
+  <h2>Tweets</h2>
+  <%= render  partial: "tweets/tweet", collection: @user.tweets, as: :tweet, locals: {likes_count: @likes_count} %>
+<% end %>
