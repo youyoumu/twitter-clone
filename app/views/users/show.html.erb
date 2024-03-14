@@ -4,9 +4,11 @@
 <% if current_user.following.include?(@user) %>
   <p>Following</p>
 <% end %>
-<%= link_to 'Following', user_following_path(@user) %>
-<%= link_to 'Followers', user_followers_path(@user) %>
-<%= link_to 'Likes', user_likes_path(@user) %>
+<div>
+  <span><%= @user.following.count %> <%= link_to 'Following', user_following_path(@user) %></span>
+  <span><%= @user.followers.count %> <%= link_to 'Followers', user_followers_path(@user) %></span>
+  <span><%= @user.likes.count %> <%= link_to 'Likes', user_likes_path(@user) %></span>
+</div>
 <%= form_with url: user_follow_path(@user), model: @user, local: true, method: :post do |f|%>
   <%= f.submit "Follow" %>
 <% end %>
