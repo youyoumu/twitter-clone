@@ -9,4 +9,5 @@
   <%= form_with url: tweet_like_path(tweet), model: tweet, local: true, method: :delete do |f|%>
     <%= f.submit "Unlike" %>
   <% end %>
+  <%= link_to 'Reply(show)', tweet_path(tweet) %>
 </div>
