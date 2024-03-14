@@ -5,3 +5,7 @@
 <% end %>
 <%= render  partial: "tweet", locals: {tweet: @tweet, likes_count: @likes_count} %>
 <%= render  partial: "tweet_reply_form", locals: {tweet: @tweet_reply, parent: @tweet} %>
+<% unless @tweet.replies.nil? %>
+  <h2>Replies</h2>
+  <%= render  partial: "tweet", collection: @tweet.replies, as: :tweet, locals: {likes_count: @likes_count} %>
+<% end %>
