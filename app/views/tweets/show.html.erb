@@ -1,11 +1,11 @@
 <h1>Tweet show</h1>
-<% unless @tweet.parent.nil? %>
+<% unless @tweet.parent.empty? %>
   <h2>replied to:</h2>
   <%= render  partial: "tweet", locals: {tweet: @tweet.parent, likes_count: @likes_count} %>
 <% end %>
 <%= render  partial: "tweet", locals: {tweet: @tweet, likes_count: @likes_count} %>
 <%= render  partial: "tweet_reply_form", locals: {tweet: @tweet_reply, parent: @tweet} %>
-<% unless @tweet.replies.nil? %>
+<% unless @tweet.replies.empty? %>
   <h2>Replies</h2>
   <%= render  partial: "tweet", collection: @tweet.replies, as: :tweet, locals: {likes_count: @likes_count} %>
 <% end %>
