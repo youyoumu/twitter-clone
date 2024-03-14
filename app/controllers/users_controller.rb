@@ -7,4 +7,13 @@ class UsersController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def likes
+    if User.exists?(params[:id])
+      @user = User.find(params[:id])
+      @likes_count = UserLike.group(:like).count
+    else
+      redirect_to root_path
+    end
+  end
 end

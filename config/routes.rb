@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resource :following, only: [:show]
     resource :followers, only: [:show]
   end
+  get 'users/:id/likes', to: 'users#likes', as: 'user_likes'
   resources :tweets do
     resource :like, only: %i[create destroy show]
   end

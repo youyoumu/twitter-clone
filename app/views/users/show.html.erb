@@ -6,6 +6,7 @@
 <% end %>
 <%= link_to 'Following', user_following_path(@user) %>
 <%= link_to 'Followers', user_followers_path(@user) %>
+<%= link_to 'Likes', user_likes_path(@user) %>
 <%= form_with url: user_follow_path(@user), model: @user, local: true, method: :post do |f|%>
   <%= f.submit "Follow" %>
 <% end %>
