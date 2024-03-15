@@ -1,0 +1,11 @@
+<h1>Settings</h1>
+<% if current_user.avatar.attached? %>
+  <%= image_tag current_user.avatar, alt: 'current_user.avatar' %>
+<% else %>
+  <h2>No Avatar</h2>
+<% end %>
+<%= form_with url: 'settings', model: current_user, method: :patch do |f|%>
+  <%= f.label :avatar, "Update Avatar" %>
+  <%= f.file_field :avatar %>
+  <%= f.submit "Update" %>
+<% end %>

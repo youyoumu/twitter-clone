@@ -16,4 +16,17 @@ class UsersController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def settings; end
+
+  def settings_update
+    current_user.update(settings_params)
+    redirect_to settings_path
+  end
+
+  private
+
+  def settings_params
+    params.require(:user).permit(:avatar)
+  end
 end

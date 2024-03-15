@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     resource :followers, only: [:show]
   end
   get 'users/:id/likes', to: 'users#likes', as: 'user_likes'
+  get 'settings', to: 'users#settings', as: 'settings'
+  patch 'settings', to: 'users#settings_update'
+
   resources :tweets do
     resource :like, only: %i[create destroy show]
   end
