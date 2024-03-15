@@ -20,8 +20,12 @@ class UsersController < ApplicationController
   def settings; end
 
   def settings_update
-    current_user.update(settings_params)
-    redirect_to settings_path
+    if current_user.update(settings_params)
+      redirect_to settings_path
+    else
+      current_user.reload
+      render :settings, status: :unprocessable_entity
+    end
   end
 
   private

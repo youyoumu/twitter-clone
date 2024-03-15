@@ -1,4 +1,9 @@
 <h1>Settings</h1>
+<% if current_user.errors[:avatar].any? %>
+  <% current_user.errors.full_messages_for(:avatar).each do |message| %>
+    <div><%= message %></div>
+  <% end %>
+<% end %>
 <% if current_user.avatar.attached? %>
   <%= image_tag current_user.avatar, alt: 'current_user.avatar' %>
 <% else %>
