@@ -50,7 +50,7 @@ class TweetsController < ApplicationController
   end
 
   def set_tweets
-    @tweets = Tweet.all.includes(:user).order(created_at: :desc)
+    @tweets = Tweet.all.with_attached_tweet_pic.includes(:user).order(created_at: :desc)
     @likes_count = UserLike.group(:like).count
   end
 end
