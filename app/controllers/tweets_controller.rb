@@ -8,11 +8,14 @@ class TweetsController < ApplicationController
   def create
     @tweet = Tweet.new(tweet_params)
     @tweet.user = current_user
-
-    if @tweet.save
-      redirect_to tweet_path(@tweet)
+    if @tweet.content.blank?
+      if @tweet.tweet_pic.attached?
+        save_tweet
+      else
+        redirect_to root_path, status: :unprocessable_entity
+      end
     else
-      redirect_to root_path, status: :unprocessable_entity
+      save_tweet
     end
   end
 
@@ -26,5 +29,13 @@ class TweetsController < ApplicationController
 
   def tweet_params
     params.require(:tweet).permit(:content, :tweet_pic, parent_attributes: [:id])
+  end
+
+  def save_tweet
+    if @tweet.save
+      redirect_to tweet_path(@tweet)
+    else
+      redirect_to root_path, status: :unprocessable_entity
+    end
   end
 end
