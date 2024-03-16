@@ -19,10 +19,17 @@ class Tweet < ApplicationRecord
   validates :content, presence: true, length: { minimum: 1, maximum: 280 }
 
   accepts_nested_attributes_for :parent
-
   def parent_attributes=(attrs)
     self.parent = Tweet.find_by!(id: attrs[:id])
   rescue ActiveRecord::RecordNotFound
     # nothing
   end
+
+  has_one_attached :tweet_pic
+  validates :tweet_pic, attached: true,
+                        content_type: { in: ['image/png', 'image/jpeg'], message: 'must be a PNG or JPEG' },
+                        dimension: { width: { max: 2000 },
+                                     height: { max: 2000 },
+                                     message: 'must be no larger than 2000x2000' },
+                        size: { less_than: 2.megabyte, message: 'must be less than 2MB' }
 end
