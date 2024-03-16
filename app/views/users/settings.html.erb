@@ -12,5 +12,16 @@
 <%= form_with url: 'settings', model: current_user, method: :patch do |f|%>
   <%= f.label :avatar, "Update Avatar" %>
   <%= f.file_field :avatar %>
-  <%= f.submit "Update" %>
+  <%= f.submit "Update Avatar" %>
+<% end %>
+<% if current_user.errors[:username].any? %>
+  <% current_user.errors.full_messages_for(:username).each do |message| %>
+    <div><%= message %></div>
+  <% end %>
+<% end %>
+<div>Current Username: <%= current_user.username %></div>
+<%= form_with url: 'settings', model: current_user, method: :patch do |f|%>
+  <%= f.label :username, 'New Username' %>
+  <%= f.text_field :username, placeholder: 'Enter your new username', value: '' %>
+  <%= f.submit "Update Username" %>
 <% end %>
