@@ -1,4 +1,9 @@
 <h1>User show</h1>
+<% if @user.avatar.attached? %>
+  <%= image_tag @user.avatar, alt: 'current_user.avatar' %>
+<% else %>
+  <h2>No Avatar</h2>
+<% end %>
 <p>User id: <%= @user.id %></p>
 <p>User username: <%= @user.username %></p>
 <% if current_user.following.include?(@user) %>
