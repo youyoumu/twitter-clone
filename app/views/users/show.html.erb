@@ -2,7 +2,7 @@
 <% if @user.avatar.attached? %>
   <%= image_tag @user.avatar, alt: 'current_user.avatar' %>
 <% else %>
-  <h2>No Avatar</h2>
+  <%= image_tag "no_avatar.svg", alt: 'no_avatar.svg' %>
 <% end %>
 <p>User id: <%= @user.id %></p>
 <p>User username: <%= @user.username %></p>
