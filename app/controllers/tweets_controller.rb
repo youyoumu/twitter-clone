@@ -11,17 +11,7 @@ class TweetsController < ApplicationController
       if @tweet.tweet_pic.attached?
         save_tweet
       else
-        flash.now[:error] =
-          'tweet cannot be blank without a picture.'
-        set_tweets
-        if @tweet.parent.present?
-          @tweet_reply = @tweet
-          @tweet = @tweet.parent
-          @likes_count = UserLike.where(like: @tweet).group(:like).count
-          render :show, status: :unprocessable_entity
-        else
-          render :index, status: :unprocessable_entity
-        end
+        render_content_blank_error
       end
     else
       save_tweet
@@ -44,13 +34,38 @@ class TweetsController < ApplicationController
     if @tweet.save
       redirect_to tweet_path(@tweet)
     else
-      set_tweets
-      render :index, status: :unprocessable_entity
+      render_error
     end
   end
 
   def set_tweets
     @tweets = Tweet.all.with_attached_tweet_pic.includes(:user).order(created_at: :desc)
     @likes_count = UserLike.group(:like).count
+  end
+
+  def render_show_error
+    @tweet_reply = @tweet
+    @tweet = @tweet.parent
+    @likes_count = UserLike.where(like: @tweet).group(:like).count
+    render :show, status: :unprocessable_entity
+  end
+
+  def render_content_blank_error
+    flash.now[:error] =
+      'tweet cannot be blank without a picture.'
+    render_error
+  end
+
+  def render_index_error
+    set_tweets
+    render :index, status: :unprocessable_entity
+  end
+
+  def render_error
+    if @tweet.parent.present?
+      render_show_error
+    else
+      render_index_error
+    end
   end
 end
