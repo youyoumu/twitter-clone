@@ -1,7 +1,6 @@
 class TweetsController < ApplicationController
   def index
-    @tweets = Tweet.all.includes(:user).order(created_at: :desc)
-    @likes_count = UserLike.group(:like).count
+    set_tweets
     @tweet = Tweet.new
   end
 
@@ -12,7 +11,17 @@ class TweetsController < ApplicationController
       if @tweet.tweet_pic.attached?
         save_tweet
       else
-        redirect_to root_path, status: :unprocessable_entity
+        flash.now[:error] =
+          'tweet cannot be blank without a picture.'
+        set_tweets
+        if @tweet.parent.present?
+          @tweet_reply = @tweet
+          @tweet = @tweet.parent
+          @likes_count = UserLike.where(like: @tweet).group(:like).count
+          render :show, status: :unprocessable_entity
+        else
+          render :index, status: :unprocessable_entity
+        end
       end
     else
       save_tweet
@@ -35,7 +44,13 @@ class TweetsController < ApplicationController
     if @tweet.save
       redirect_to tweet_path(@tweet)
     else
-      redirect_to root_path, status: :unprocessable_entity
+      set_tweets
+      render :index, status: :unprocessable_entity
     end
+  end
+
+  def set_tweets
+    @tweets = Tweet.all.includes(:user).order(created_at: :desc)
+    @likes_count = UserLike.group(:like).count
   end
 end
