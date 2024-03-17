@@ -1,10 +1,14 @@
-<div>
-  <%= link_to tweet.user.username, user_path(tweet.user) %>
-  <span><%= tweet.created_at %></span>
+<div class="card">
+  <div class="card-body">
+    <div class="card-title">
+      <span class="fs-3 fw-bold"><%= link_to tweet.user.username, user_path(tweet.user) %></span>
+      <span><%= tweet.created_at %></span>
+    </div>
+    <p> <%= tweet.content %></p>
+  </div>
   <% if tweet.tweet_pic.attached? %>
-    <%= image_tag tweet.tweet_pic, alt: 'tweet_pic' %>
+    <%= image_tag tweet.tweet_pic, alt: 'tweet_pic'%>
   <% end %>
-  <p> <%= tweet.content %></p>
   <div><%= likes_count[tweet.id].nil? ? 0 : likes_count[tweet.id] %> <%= link_to 'Like', tweet_like_path(tweet) %></div>
   <%= form_with url: tweet_like_path(tweet), model: tweet, local: true, method: :post do |f|%>
     <%= f.submit "Like" %>

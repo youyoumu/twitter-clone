@@ -22,16 +22,18 @@
         <% end %>
       </ul>
     </nav>
-    <% if true #notice.present? %>
-      <div class="alert alert-primary container my-4">
-        <p class="">notice<%= notice %></p>
-      </div>
-    <% end %>
-    <% if true #alert.present? %>
-      <div class="alert alert-secondary container my-4">
-        <p class="">alert<%= alert %></p>
-      </div>
-    <% end %>
-    <%= yield %>
+    <div class="container">
+      <% if true #notice.present? %>
+        <div class="alert alert-primary my-4">
+          <p class="">notice<%= notice %></p>
+        </div>
+      <% end %>
+      <% if true #alert.present? %>
+        <div class="alert alert-secondary my-4">
+          <p class="">alert<%= alert %></p>
+        </div>
+      <% end %>
+      <%= yield %>
+    </div>
   </body>
 </html>

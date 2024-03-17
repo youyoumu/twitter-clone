@@ -1,5 +1,6 @@
-<h1>Twitter</h1>
-<%= render  partial: "tweet_form", locals: {tweet: @tweet} %>
-<% @tweets.each do |tweet| %>
-  <%= render  partial: "tweet", locals: {tweet: tweet, likes_count: @likes_count} %>
-<% end %>
+<div class="mb-3"><%= render  partial: "tweet_form", locals: {tweet: @tweet} %></div>
+<div class="">
+  <% @tweets.each do |tweet| %>
+    <%= render  partial: "tweet", locals: {tweet: tweet, likes_count: @likes_count} %>
+  <% end %>
+</div>
