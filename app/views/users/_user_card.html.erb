@@ -4,7 +4,7 @@
       <% if user.avatar.attached? %>
         <%= image_tag user.avatar, alt: 'user_avatar', height: '64px', style: "object-fit: cover", class: "rounded-circle" %>
       <% else %>
-        <%= image_tag "no_avatar.svg", alt: 'no_avatar.svg', heigth: '64px', class: "rounded-circle" %>
+        <%= image_tag "no_avatar.svg", alt: 'no_avatar.svg', height: '64', width: '64', style: "object-fit: cover", class: "rounded-circle" %>
       <% end %>
     </div>
     <%= link_to user.username, user_path(user), class: "fs-3" %>

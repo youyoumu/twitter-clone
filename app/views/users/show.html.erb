@@ -1,8 +1,8 @@
 <div class="d-flex justify-content-between mb-2">
   <% if @user.avatar.attached? %>
-    <%= image_tag @user.avatar, alt: 'current_user.avatar', class: "rounded-4" %>
+    <%= image_tag @user.avatar, alt: 'user_avatar', height: '64px', style: "object-fit: cover", class: "rounded-circle" %>
   <% else %>
-    <%= image_tag "no_avatar.svg", alt: 'no_avatar.svg', class: "rounded-4" %>
+    <%= image_tag "no_avatar.svg", alt: 'no_avatar.svg', height: '256', width: '256', style: "object-fit: cover", class: "rounded-circle" %>
   <% end %>
   <div class="d-flex align-items-end gap-1">
     <%= link_to 'Follow', user_follow_path(@user),data: {turbo_method: :post}, class: "btn btn-primary" %>
