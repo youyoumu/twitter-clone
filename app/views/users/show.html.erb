@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-between mb-2">
   <% if @user.avatar.attached? %>
-    <%= image_tag @user.avatar, alt: 'user_avatar', height: '64px', style: "object-fit: cover", class: "rounded-circle" %>
+    <%= image_tag @user.avatar, alt: 'user_avatar', height: '256px', style: "object-fit: cover", class: "rounded-circle" %>
   <% else %>
     <%= image_tag "no_avatar.svg", alt: 'no_avatar.svg', height: '256', width: '256', style: "object-fit: cover", class: "rounded-circle" %>
   <% end %>
