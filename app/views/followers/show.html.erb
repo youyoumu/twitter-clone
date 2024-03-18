@@ -1,4 +1,4 @@
-<h1><%= @user.username %> Followers</h1>
+<h1 class="mb-3"><%= @user.username %> Followers</h1>
 <% unless @followers.empty? %>
   <% @followers.each do |follower| %>
     <%= render  partial: "users/user_card", locals: {user: follower} %>
