@@ -1,7 +1,7 @@
 <h1><%= @user.username %> Following</h1>
 <% unless @followings.empty? %>
   <% @followings.each do |following| %>
-    <div><%= link_to following.username, user_path(following) %></div>
+    <%= render  partial: "users/user_card", locals: {user: following} %>
   <% end %>
 <% else %>
   <h2>No Following</h2>
