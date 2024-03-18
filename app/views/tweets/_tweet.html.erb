@@ -1,7 +1,16 @@
 <div class="card mb-4" >
   <div class="card-body">
-    <div class="card-title">
-      <span class="fs-4 fw-bold"><%= link_to tweet.user.username, user_path(tweet.user) %></span>
+    <div class="card-title d-flex justify-content-between">
+      <div class="d-flex">
+        <div class="me-3">
+          <% if tweet.user.avatar.attached? %>
+            <%= image_tag tweet.user.avatar, alt: 'user_avatar', height: '64px', style: "object-fit: cover", class: "rounded-circle" %>
+          <% else %>
+            <%= image_tag "no_avatar.svg", alt: 'no_avatar.svg', heigth: '64', width: '64', style: "object-fit: cover", class: "rounded-circle" %>
+          <% end %>
+        </div>
+        <%= link_to tweet.user.username, user_path(tweet.user), class: "fs-4 fw-bold" %>
+      </div>
       <span class="fs-6 text-body-secondary"><%= tweet.created_at %></span>
     </div>
     <p class="fs-5"> <%= tweet.content %></p>
