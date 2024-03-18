@@ -1,4 +1,5 @@
-<div class="mb-3"><%= render  partial: "tweet_form", locals: {tweet: @tweet} %></div>
+<div class="mb-3">
+  <%= render  partial: "tweet_form", locals: {tweet: @tweet} %></div>
 <div class="">
   <% @tweets.each do |tweet| %>
     <%= render  partial: "tweet", locals: {tweet: tweet, likes_count: @likes_count} %>

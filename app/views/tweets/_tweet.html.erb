@@ -1,20 +1,21 @@
-<div class="card">
+<div class="card mb-4" >
   <div class="card-body">
     <div class="card-title">
-      <span class="fs-3 fw-bold"><%= link_to tweet.user.username, user_path(tweet.user) %></span>
-      <span><%= tweet.created_at %></span>
+      <span class="fs-4 fw-bold"><%= link_to tweet.user.username, user_path(tweet.user) %></span>
+      <span class="fs-6 text-body-secondary"><%= tweet.created_at %></span>
     </div>
-    <p> <%= tweet.content %></p>
+    <p class="fs-5"> <%= tweet.content %></p>
+    <% if tweet.tweet_pic.attached? %>
+      <%= image_tag tweet.tweet_pic, alt: 'tweet_pic', style: "object-fit: cover; max-height: 600px; width: 100%;", class: "mb-3"%>
+    <% end %>
+    <div class="d-flex">
+      <div class="input-group mb-1">
+        <%= link_to 'Like', tweet_like_path(tweet), class: "input-group-text" %>
+        <span class="input-group-text"><%= likes_count[tweet.id].nil? ? 0 : likes_count[tweet.id] %></span>
+        <%= link_to 'Like', tweet_like_path(tweet),data: {turbo_method: :post}, class: "btn btn-outline-primary" %>
+        <%= link_to 'Unlike', tweet_like_path(tweet),data: {turbo_method: :delete}, class: "btn btn-outline-danger" %>
+      </div>
+      <%= link_to 'Reply', tweet_path(tweet), class: "btn btn-primary" %>
+    </div>
   </div>
-  <% if tweet.tweet_pic.attached? %>
-    <%= image_tag tweet.tweet_pic, alt: 'tweet_pic'%>
-  <% end %>
-  <div><%= likes_count[tweet.id].nil? ? 0 : likes_count[tweet.id] %> <%= link_to 'Like', tweet_like_path(tweet) %></div>
-  <%= form_with url: tweet_like_path(tweet), model: tweet, local: true, method: :post do |f|%>
-    <%= f.submit "Like" %>
-  <% end %>
-  <%= form_with url: tweet_like_path(tweet), model: tweet, local: true, method: :delete do |f|%>
-    <%= f.submit "Unlike" %>
-  <% end %>
-  <%= link_to 'Reply(show)', tweet_path(tweet) %>
 </div>
