@@ -1,20 +1,23 @@
-<% if @user.avatar.attached? %>
-  <%= image_tag @user.avatar, alt: 'current_user.avatar' %>
-<% else %>
-  <%= image_tag "no_avatar.svg", alt: 'no_avatar.svg' %>
-<% end %>
-<p>User id: <%= @user.id %></p>
-<p>User username: <%= @user.username %></p>
-<% if current_user.following.include?(@user) %>
-  <p>Following</p>
-<% end %>
-<div>
-  <span><%= @user.following.count %> <%= link_to 'Following', user_following_path(@user) %></span>
-  <span><%= @user.followers.count %> <%= link_to 'Followers', user_followers_path(@user) %></span>
-  <span><%= @user.likes.count %> <%= link_to 'Likes', user_likes_path(@user) %></span>
+<div class="d-flex justify-content-between mb-2">
+  <% if @user.avatar.attached? %>
+    <%= image_tag @user.avatar, alt: 'current_user.avatar', class: "rounded-4" %>
+  <% else %>
+    <%= image_tag "no_avatar.svg", alt: 'no_avatar.svg', class: "rounded-4" %>
+  <% end %>
+  <div class="d-flex align-items-end gap-1">
+    <%= link_to 'Follow', user_follow_path(@user),data: {turbo_method: :post}, class: "btn btn-primary" %>
+    <%= link_to 'Unfollow', user_follow_path(@user),data: {turbo_method: :delete}, class: "btn btn-danger" %>
+  </div>
 </div>
-<%= link_to 'Follow', user_follow_path(@user),data: {turbo_method: :post}, class: "btn btn-primary" %>
-<%= link_to 'Unfollow', user_follow_path(@user),data: {turbo_method: :delete}, class: "btn btn-danger" %>
+<div class="fs-3 mb-2"><%= @user.username %></div>
+<% if current_user.following.include?(@user) %>
+  <div class="fs-5 text-secondary mb-2">Following</div>
+<% end %>
+<div class="mb-3">
+  <%= @user.following.count %> <%= link_to 'Following', user_following_path(@user) %>
+  <%= @user.followers.count %> <%= link_to 'Followers', user_followers_path(@user) %>
+  <%= @user.likes.count %> <%= link_to 'Likes', user_likes_path(@user) %>
+</div>
 <% unless @user.tweets.empty? %>
   <h2>Tweets</h2>
   <%= render  partial: "tweets/tweet", collection: @user.tweets, as: :tweet, locals: {likes_count: @likes_count} %>
