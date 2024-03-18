@@ -3,7 +3,9 @@
   <%= f.fields_for :parent, parent do |parent_f| %>
     <%= parent_f.hidden_field :id, value: parent.id %>
   <% end %>
-  <%= f.text_field :content %>
-  <%= f.file_field :tweet_pic %>
-  <%= f.submit "Tweet" %>
+  <%= f.text_area :content, class: "form-control mb-2" %>
+  <div class="input-group">
+    <%= f.file_field :tweet_pic, class: "form-control" %>
+    <%= f.submit "Tweet", class: "btn btn-primary" %>
+  </div>
 <% end %>
