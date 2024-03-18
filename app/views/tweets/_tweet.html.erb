@@ -10,8 +10,7 @@
     <% end %>
     <div class="d-flex">
       <div class="input-group mb-1">
-        <%= link_to 'Like', tweet_like_path(tweet), class: "input-group-text" %>
-        <span class="input-group-text"><%= likes_count[tweet.id].nil? ? 0 : likes_count[tweet.id] %></span>
+        <%= link_to likes_count[tweet.id].nil? ? 0 : likes_count[tweet.id], tweet_like_path(tweet), class: "input-group-text text-decoration-none" %>
         <%= link_to 'Like', tweet_like_path(tweet),data: {turbo_method: :post}, class: "btn btn-outline-primary" %>
         <%= link_to 'Unlike', tweet_like_path(tweet),data: {turbo_method: :delete}, class: "btn btn-outline-danger" %>
       </div>
