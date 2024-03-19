@@ -19,7 +19,7 @@
     <% end %>
     <div class="d-flex">
       <div class="input-group mb-1" data-controller="like">
-        <%= link_to likes_count[tweet.id].nil? ? 0 : likes_count[tweet.id], tweet_like_path(tweet), class: "input-group-text text-decoration-none" %>
+        <%= link_to likes_count[tweet.id].nil? ? 0 : likes_count[tweet.id], tweet_like_path(tweet), class: "input-group-text text-decoration-none", "data-like-target": "likeCount" %>
         <% if tweet.likers.include?(current_user) %>
           <%= link_to 'Unlike', tweet_like_path(tweet),data: {turbo_method: :delete}, class: "btn btn-outline-danger", hidden: false, "data-action": "like#unlike", "data-like-target": "unlikeButton" %>
           <%= link_to 'Like', tweet_like_path(tweet),data: {turbo_method: :post}, class: "btn btn-outline-primary", hidden: true, "data-action": "like#like", "data-like-target": "likeButton" %>
