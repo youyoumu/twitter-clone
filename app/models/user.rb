@@ -31,10 +31,10 @@ class User < ApplicationRecord
   has_many :tweets
 
   has_one_attached :avatar
-  validates :avatar, attached: true,
-                     content_type: { in: ['image/png', 'image/jpeg'], message: 'must be a PNG or JPEG' },
-                     dimension: { width: { max: 1200 },
-                                  height: { max: 1200 },
-                                  message: 'must be no larger than 1200x1200' },
-                     size: { less_than: 2.megabyte, message: 'must be less than 2MB' }
+  validates :avatar,
+            content_type: { in: ['image/png', 'image/jpeg'], message: 'must be a PNG or JPEG' },
+            dimension: { width: { max: 1200 },
+                         height: { max: 1200 },
+                         message: 'must be no larger than 1200x1200' },
+            size: { less_than: 2.megabyte, message: 'must be less than 2MB' }
 end
