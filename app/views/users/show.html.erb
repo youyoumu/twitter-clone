@@ -4,12 +4,14 @@
   <% else %>
     <%= image_tag "no_avatar.svg", alt: 'no_avatar.svg', height: '256', width: '256', style: "object-fit: cover", class: "rounded-circle" %>
   <% end %>
-  <div class="d-flex align-items-end gap-1">
+  <div class="d-flex align-items-end gap-1" data-controller="follow">
     <% unless @user == current_user %>
       <% if current_user.following.include?(@user) %>
-        <%= link_to 'Unfollow', user_follow_path(@user),data: {turbo_method: :delete}, class: "btn btn-danger" %>
+        <%= link_to 'Unfollow', user_follow_path(@user),data: {turbo_method: :delete}, class: "btn btn-danger", hidden: false, "data-action": "follow#unfollow", "data-follow-target": "unfollowButton" %>
+        <%= link_to 'Follow', user_follow_path(@user),data: {turbo_method: :post}, class: "btn btn-primary", hidden: true,"data-action": "follow#follow", "data-follow-target": "followButton" %>
       <% else %>
-        <%= link_to 'Follow', user_follow_path(@user),data: {turbo_method: :post}, class: "btn btn-primary" %>
+        <%= link_to 'Unfollow', user_follow_path(@user),data: {turbo_method: :delete}, class: "btn btn-danger", hidden: true,"data-action": "follow#unfollow", "data-follow-target": "unfollowButton" %>
+        <%= link_to 'Follow', user_follow_path(@user),data: {turbo_method: :post}, class: "btn btn-primary", hidden: false,"data-action": "follow#follow", "data-follow-target": "followButton" %>
       <% end %>
     <% end %>
   </div>
