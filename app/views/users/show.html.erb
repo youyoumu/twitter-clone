@@ -5,8 +5,13 @@
     <%= image_tag "no_avatar.svg", alt: 'no_avatar.svg', height: '256', width: '256', style: "object-fit: cover", class: "rounded-circle" %>
   <% end %>
   <div class="d-flex align-items-end gap-1">
-    <%= link_to 'Follow', user_follow_path(@user),data: {turbo_method: :post}, class: "btn btn-primary" %>
-    <%= link_to 'Unfollow', user_follow_path(@user),data: {turbo_method: :delete}, class: "btn btn-danger" %>
+    <% unless @user == current_user %>
+      <% if current_user.following.include?(@user) %>
+        <%= link_to 'Unfollow', user_follow_path(@user),data: {turbo_method: :delete}, class: "btn btn-danger" %>
+      <% else %>
+        <%= link_to 'Follow', user_follow_path(@user),data: {turbo_method: :post}, class: "btn btn-primary" %>
+      <% end %>
+    <% end %>
   </div>
 </div>
 <div class="fs-3 mb-2"><%= @user.username %></div>
