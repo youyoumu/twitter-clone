@@ -19,9 +19,9 @@
         <% end %>
       </ul>
       <% if current_user != nil && current_user.avatar.attached? %>
-        <%= image_tag current_user.avatar, alt: 'user_avatar', height: '64px', style: "object-fit: cover", class: "rounded-circle" %>
+        <%= image_tag current_user.avatar, alt: 'user_avatar', height: '50px', style: "object-fit: cover", class: "rounded-circle" %>
       <% elsif current_user != nil %>
-        <%= image_tag "no_avatar.svg", alt: 'no_avatar.svg', height: '64', width: '64', style: "object-fit: cover", class: "rounded-circle" %>
+        <%= image_tag "no_avatar.svg", alt: 'no_avatar.svg', height: '50', width: '50', style: "object-fit: cover", class: "rounded-circle" %>
       <% end %>
     </nav>
     <div class="container col-sm-9 col-md-8 col-lg-7 col-xl-6 col-xxl-5">
