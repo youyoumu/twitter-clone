@@ -1,27 +1,37 @@
-<h1>Settings</h1>
-<% if current_user.errors[:avatar].any? %>
-  <% current_user.errors.full_messages_for(:avatar).each do |message| %>
-    <div><%= message %></div>
+<h1 class="mb-3">Settings</h1>
+<div class="mb-3">
+  <% if current_user.avatar.attached? %>
+    <%= image_tag current_user.avatar, alt: 'user_avatar', height: '256px', style: "object-fit: cover", class: "rounded-circle" %>
+  <% else %>
+    <%= image_tag "no_avatar.svg", alt: 'no_avatar.svg', height: '256', width: '256', style: "object-fit: cover", class: "rounded-circle" %>
   <% end %>
+</div>
+<div class="mb-3 fs-3">
+  <%= current_user.username %>
+</div>
+<% if current_user.errors[:avatar].any? %>
+  <div class="alert alert-primary mb-3">
+    <% current_user.errors.full_messages_for(:avatar).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
 <% end %>
-<% if current_user.avatar.attached? %>
-  <%= image_tag current_user.avatar, alt: 'current_user.avatar' %>
-<% else %>
-  <%= image_tag "no_avatar.svg", alt: 'no_avatar.svg' %>
-<% end %>
-<%= form_with url: 'settings', model: current_user, method: :patch do |f|%>
-  <%= f.label :avatar, "Update Avatar" %>
-  <%= f.file_field :avatar %>
-  <%= f.submit "Update Avatar" %>
+<%= form_with url: 'settings', model: current_user, method: :patch, class: "mb-3" do |f|%>
+  <div class="input-group">
+    <%= f.file_field :avatar, class: "form-control"%>
+    <%= f.submit "Update Avatar", class: "btn btn-primary" %>
+  </div>
 <% end %>
 <% if current_user.errors[:username].any? %>
-  <% current_user.errors.full_messages_for(:username).each do |message| %>
-    <div><%= message %></div>
-  <% end %>
+  <div class="alert alert-primary">
+    <% current_user.errors.full_messages_for(:username).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
 <% end %>
-<div>Current Username: <%= current_user.username %></div>
 <%= form_with url: 'settings', model: current_user, method: :patch do |f|%>
-  <%= f.label :username, 'New Username' %>
-  <%= f.text_field :username, placeholder: 'Enter your new username', value: '' %>
-  <%= f.submit "Update Username" %>
+  <div class="input-group">
+    <%= f.text_field :username, placeholder: 'Enter your new username', value: '', class: "form-control" %>
+    <%= f.submit "Update Username", class: "btn btn-primary" %>
+  </div>
 <% end %>
