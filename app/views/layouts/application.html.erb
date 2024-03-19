@@ -9,7 +9,7 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
-    <nav class="navbar navbar-expand bg-dark mb-3" data-bs-theme="dark">
+    <nav class="navbar navbar-expand bg-dark mb-3 px-3 py-2" data-bs-theme="dark">
       <div class="container-fluid"><%= link_to 'Twitter Clone', root_path, class: "navbar-brand fs-2" %></div>
       <ul class="navbar-nav col-auto container">
         <% if user_signed_in? %>
@@ -21,6 +21,11 @@
           <li class="nav-item"><%= link_to 'Sign Up', new_user_registration_path, class: "nav-link" %></li>
         <% end %>
       </ul>
+      <% if current_user.avatar.attached? %>
+        <%= image_tag current_user.avatar, alt: 'user_avatar', height: '64px', style: "object-fit: cover", class: "rounded-circle" %>
+      <% else %>
+        <%= image_tag "no_avatar.svg", alt: 'no_avatar.svg', height: '64', width: '64', style: "object-fit: cover", class: "rounded-circle" %>
+      <% end %>
     </nav>
     <div class="container col-sm-9 col-md-8 col-lg-7 col-xl-6 col-xxl-5">
       <% if notice.present? %>
