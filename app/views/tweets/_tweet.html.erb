@@ -18,12 +18,14 @@
       <%= image_tag tweet.tweet_pic, alt: 'tweet_pic', style: "object-fit: cover; max-height: 600px; width: 100%;", class: "mb-3"%>
     <% end %>
     <div class="d-flex">
-      <div class="input-group mb-1">
+      <div class="input-group mb-1" data-controller="like">
         <%= link_to likes_count[tweet.id].nil? ? 0 : likes_count[tweet.id], tweet_like_path(tweet), class: "input-group-text text-decoration-none" %>
         <% if tweet.likers.include?(current_user) %>
-          <%= link_to 'Unlike', tweet_like_path(tweet),data: {turbo_method: :delete}, class: "btn btn-outline-danger" %>
+          <%= link_to 'Unlike', tweet_like_path(tweet),data: {turbo_method: :delete}, class: "btn btn-outline-danger", hidden: false, "data-action": "like#unlike", "data-like-target": "unlikeButton" %>
+          <%= link_to 'Like', tweet_like_path(tweet),data: {turbo_method: :post}, class: "btn btn-outline-primary", hidden: true, "data-action": "like#like", "data-like-target": "likeButton" %>
         <% else %>
-          <%= link_to 'Like', tweet_like_path(tweet),data: {turbo_method: :post}, class: "btn btn-outline-primary" %>
+          <%= link_to 'Unlike', tweet_like_path(tweet),data: {turbo_method: :delete}, class: "btn btn-outline-danger", hidden: true, "data-action": "like#unlike", "data-like-target": "unlikeButton" %>
+          <%= link_to 'Like', tweet_like_path(tweet),data: {turbo_method: :post}, class: "btn btn-outline-primary", hidden: false, "data-action": "like#like", "data-like-target": "likeButton" %>
         <% end %>
       </div>
       <%= link_to 'Reply', tweet_path(tweet), class: "btn btn-primary" %>
