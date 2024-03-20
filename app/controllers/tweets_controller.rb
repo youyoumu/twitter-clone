@@ -24,6 +24,23 @@ class TweetsController < ApplicationController
     @likes_count = UserLike.where(like: @tweet).group(:like).count
   end
 
+  def page
+    @last_tweet_id = if params[:last_tweet_id].blank?
+                       Tweet.last.id
+                     else
+                       params[:last_tweet_id].to_i
+                     end
+    page_size = 10
+    @page = if params[:page].blank?
+              1
+            else
+              params[:page].to_i
+            end
+    @tweets = Tweet.where('id <= ?', (@last_tweet_id - (page_size * (@page - 1)))).order(id: :desc).limit(page_size)
+    @likes_count = UserLike.where(like: @tweets).group(:like).count
+    @total_pages = (Tweet.count.to_f / page_size).ceil
+  end
+
   private
 
   def tweet_params

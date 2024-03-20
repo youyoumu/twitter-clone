@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :tweets do
     resource :like, only: %i[create destroy show]
   end
+  get 'page', to: 'tweets#page', as: 'page'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
