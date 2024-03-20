@@ -7,3 +7,9 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+user1 = User.first
+
+100.times do |i|
+  user1.tweets.create content: "Tweet number #{i + 1}"
+end
