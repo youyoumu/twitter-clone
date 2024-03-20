@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   def show
     if User.exists?(params[:id])
       @user = User.includes(:tweets, :following, :followers).find(params[:id])
-      @user.tweets = @user.tweets.with_attached_tweet_pic
+      @user.tweets = @user.tweets.includes(:likers).with_attached_tweet_pic
       @likes_count = UserLike.group(:like).count
     else
       redirect_to root_path
