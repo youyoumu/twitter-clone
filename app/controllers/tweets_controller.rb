@@ -52,21 +52,35 @@ class TweetsController < ApplicationController
   end
 
   def page
-    @last_tweet_id = if params[:last_tweet_id].blank?
-                       Tweet.last.id
-                     else
-                       params[:last_tweet_id].to_i
-                     end
     page_size = 10
     @page = if params[:page].blank?
               1
             else
               params[:page].to_i
             end
-    @tweets = Tweet.where('id <= ?', (@last_tweet_id - (page_size * (@page - 1)))).order(id: :desc).limit(page_size)
-    @tweets = @tweets.includes(:user, :likers).with_attached_tweet_pic
+    if User.exists?(params[:user_id])
+      @user = User.find(params[:user_id])
+      @last_tweet_id = if params[:last_tweet_id].blank?
+                         @user.tweets.last.id
+                       else
+                         params[:last_tweet_id].to_i
+                       end
+      @tweets = Tweet.where(user_id: @user.id)
+                     .where('id <= ?', (@last_tweet_id - (page_size * (@page - 1))))
+                     .order(id: :desc)
+                     .limit(page_size)
+      @total_pages = (@user.tweets.count.to_f / page_size).ceil
+    else
+      @last_tweet_id = if params[:last_tweet_id].blank?
+                         Tweet.last.id
+                       else
+                         params[:last_tweet_id].to_i
+                       end
+      @tweets = Tweet.where('id <= ?', (@last_tweet_id - (page_size * (@page - 1)))).order(id: :desc).limit(page_size)
+      @total_pages = (Tweet.count.to_f / page_size).ceil
+    end
     @likes_count = UserLike.where(like: @tweets).group(:like).count
-    @total_pages = (Tweet.count.to_f / page_size).ceil
+    @tweets = @tweets.includes(:user, :likers).with_attached_tweet_pic
   end
 
   private

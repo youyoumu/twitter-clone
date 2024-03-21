@@ -28,7 +28,15 @@
 </div>
 <% unless @user.tweets.empty? %>
   <h2>Tweets</h2>
-  <%= render  partial: "tweets/tweet", collection: @user.tweets, as: :tweet, locals: {likes_count: @likes_count} %>
+  <%= turbo_frame_tag(:tweets_container) do %>
+    <%= turbo_frame_tag([:tweets, 1], src: page_path(last_tweet_id: @last_tweet_id, user_id: @user.id)) do %>
+      <div class="d-flex justify-content-center m-5">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 <% else %>
   <h2>No Tweets</h2>
 <% end %>

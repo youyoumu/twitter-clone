@@ -4,7 +4,8 @@
   <% end %>
   <%= turbo_stream.append :tweets_container do %>
     <% if @page < @total_pages %>
-      <%= turbo_frame_tag([:tweets, @page + 1], src: page_path(last_tweet_id: @last_tweet_id, page: @page + 1), loading: :lazy) do %>
+      <% user_id = @user ? @user.id : nil %>
+      <%= turbo_frame_tag([:tweets, @page + 1], src: page_path(last_tweet_id: @last_tweet_id, page: @page + 1, user_id: user_id), loading: :lazy) do %>
         <div class="d-flex justify-content-center m-5">
           <div class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
