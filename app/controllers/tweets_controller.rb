@@ -33,11 +33,17 @@ class TweetsController < ApplicationController
     @tweet = Tweet.find(params[:id])
     return if @tweet.user != current_user
 
-    if @tweet.update(update_params)
-      redirect_to tweet_path(@tweet)
+    if params[:tweet][:content].blank?
+      if @tweet.tweet_pic.attached?
+        update_tweet
+      else
+        flash.now[:error] =
+          'tweet cannot be blank without a picture.'
+        @tweet.reload
+        render :edit, status: :unprocessable_entity
+      end
     else
-      @tweet.reload
-      render :edit, status: :unprocessable_entity
+      update_tweet
     end
   end
 
@@ -74,6 +80,15 @@ class TweetsController < ApplicationController
       redirect_to tweet_path(@tweet)
     else
       render_error
+    end
+  end
+
+  def update_tweet
+    if @tweet.update(update_params)
+      redirect_to tweet_path(@tweet)
+    else
+      @tweet.reload
+      render :edit, status: :unprocessable_entity
     end
   end
 
