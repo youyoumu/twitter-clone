@@ -32,4 +32,9 @@ class Tweet < ApplicationRecord
                          height: { max: 2000 },
                          message: 'must be no larger than 2000x2000' },
             size: { less_than: 2.megabyte, message: 'must be less than 2MB' }
+
+  after_create_commit do
+    broadcast_prepend_later_to :tweets_stream, target: :tweets_container, partial: 'tweets/tweet',
+                                               locals: { tweet: self, likes_count: UserLike.where(like: self).group(:like).count }
+  end
 end
