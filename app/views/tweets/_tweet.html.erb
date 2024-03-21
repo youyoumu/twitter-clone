@@ -28,7 +28,8 @@
           <%= link_to 'Like', tweet_like_path(tweet),data: {turbo_method: :post, turbo_frame: "_top"}, class: "btn btn-outline-primary", hidden: false, "data-action": "like#like", "data-like-target": "likeButton" %>
         <% end %>
       </div>
-      <%= link_to 'Reply', tweet_path(tweet), class: "btn btn-primary", data: { turbo_frame: "_top" } %>
+      <%= link_to 'Edit', edit_tweet_path(tweet), class: "btn btn-secondary ms-2", data: { turbo_frame: "_top" } %>
+      <%= link_to 'Reply', tweet_path(tweet), class: "btn btn-primary ms-2", data: { turbo_frame: "_top" } %>
     </div>
   </div>
 </div>

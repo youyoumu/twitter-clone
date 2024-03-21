@@ -24,6 +24,23 @@ class TweetsController < ApplicationController
     @likes_count = UserLike.where(like: @tweet).group(:like).count
   end
 
+  def edit
+    @tweet = Tweet.find(params[:id])
+    nil if @tweet.user != current_user
+  end
+
+  def update
+    @tweet = Tweet.find(params[:id])
+    return if @tweet.user != current_user
+
+    if @tweet.update(update_params)
+      redirect_to tweet_path(@tweet)
+    else
+      @tweet.reload
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def page
     @last_tweet_id = if params[:last_tweet_id].blank?
                        Tweet.last.id
@@ -46,6 +63,10 @@ class TweetsController < ApplicationController
 
   def tweet_params
     params.require(:tweet).permit(:content, :tweet_pic, parent_attributes: [:id])
+  end
+
+  def update_params
+    params.require(:tweet).permit(:content)
   end
 
   def save_tweet
