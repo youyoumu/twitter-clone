@@ -79,3 +79,4 @@ gem 'tapioca', require: false, group: %i[development test]
 
 gem 'active_storage_validations'
 gem 'ruby-vips', '>= 2.1.0'
+gem "letter_opener", group: :development

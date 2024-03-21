@@ -37,4 +37,6 @@ class User < ApplicationRecord
                          height: { max: 1200 },
                          message: 'must be no larger than 1200x1200' },
             size: { less_than: 2.megabyte, message: 'must be less than 2MB' }
+
+  after_create -> { UserMailer.with(user: self).welcome_email.deliver_later }
 end
