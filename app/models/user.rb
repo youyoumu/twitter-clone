@@ -38,5 +38,7 @@ class User < ApplicationRecord
                          message: 'must be no larger than 1200x1200' },
             size: { less_than: 2.megabyte, message: 'must be less than 2MB' }
 
+  validates :bio, length: { maximum: 140, message: 'must be less than 140 characters' }
+
   after_create -> { UserMailer.with(user: self).welcome_email.deliver_later }
 end

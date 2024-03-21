@@ -17,6 +17,7 @@
   </div>
 </div>
 <div class="fs-3 mb-2"><%= @user.username %></div>
+<div class="fs-6 text-secondary mb-2"><%= @user.bio %></div>
 <% if current_user.following.include?(@user) %>
   <div class="fs-5 text-secondary mb-2">Following</div>
 <% end %>
