@@ -26,7 +26,11 @@ class TweetsController < ApplicationController
 
   def edit
     @tweet = Tweet.find(params[:id])
-    nil if @tweet.user != current_user
+    if @tweet.user != current_user
+      render plain: 'forbidden', status: :forbidden
+    else
+      render :edit
+    end
   end
 
   def update
