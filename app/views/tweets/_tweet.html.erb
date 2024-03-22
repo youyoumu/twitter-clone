@@ -4,7 +4,7 @@
       <div class="d-flex">
         <div class="me-3">
           <% if tweet.user.avatar.attached? %>
-            <%= image_tag tweet.user.avatar, alt: 'user_avatar', height: '64px', width: '64px', style: "object-fit: cover", class: "rounded-circle" %>
+            <%= image_tag tweet.user.avatar.variant(resize_to_limit: [64, 64]).processed, alt: 'user_avatar', height: '64px', width: '64px', style: "object-fit: cover", class: "rounded-circle" %>
           <% else %>
             <%= image_tag "no_avatar.svg", alt: 'no_avatar.svg', heigth: '64', width: '64', style: "object-fit: cover", class: "rounded-circle" %>
           <% end %>
@@ -15,7 +15,7 @@
     </div>
     <p class="fs-5"> <%= tweet.content %></p>
     <% if tweet.tweet_pic.attached? %>
-      <%= image_tag tweet.tweet_pic, alt: 'tweet_pic', style: "object-fit: cover; max-height: 600px; width: 100%;", class: "mb-3"%>
+      <%= image_tag tweet.tweet_pic.variant(resize_to_limit: [720, 720]).processed, alt: 'tweet_pic', style: "object-fit: cover; max-height: 600px; width: 100%;", class: "mb-3"%>
     <% end %>
     <div class="d-flex">
       <div class="input-group mb-1" data-controller="like">
