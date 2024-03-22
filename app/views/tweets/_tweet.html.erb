@@ -4,7 +4,7 @@
       <div class="d-flex">
         <div class="me-3">
           <% if tweet.user.avatar.attached? %>
-            <%= image_tag tweet.user.avatar, alt: 'user_avatar', height: '64px', style: "object-fit: cover", class: "rounded-circle" %>
+            <%= image_tag tweet.user.avatar, alt: 'user_avatar', height: '64px', width: '64px', style: "object-fit: cover", class: "rounded-circle" %>
           <% else %>
             <%= image_tag "no_avatar.svg", alt: 'no_avatar.svg', heigth: '64', width: '64', style: "object-fit: cover", class: "rounded-circle" %>
           <% end %>
