@@ -97,9 +97,8 @@ class TweetsController < ApplicationController
     if @tweet.save
       Turbo::StreamsChannel.broadcast_prepend_later_to(:tweets_stream,
                                                        target: :tweets_container,
-                                                       partial: 'tweets/tweet_stream',
-                                                       locals: { tweet: @tweet,
-                                                                 likes_count: UserLike.where(like: @tweet).group(:like).count })
+                                                       partial: 'tweets/tweet_frame',
+                                                       locals: { tweet: @tweet })
       redirect_to tweet_path(@tweet)
     else
       render_error
