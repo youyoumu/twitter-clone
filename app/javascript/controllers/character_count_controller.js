@@ -5,6 +5,6 @@ export default class extends Controller {
 
     update() {
         let charCount = this.textareaTarget.value.length
-        this.counterTarget.textContent = 240 - charCount
+        this.counterTarget.textContent = 280 - charCount
     }
 }

@@ -41,7 +41,8 @@ class User < ApplicationRecord
 
   validates :bio, length: { maximum: 140, message: 'must be less than 140 characters' }
 
-  after_create -> { UserMailer.with(user: self).welcome_email.deliver_later }
+  #disable mail
+  #after_create -> { UserMailer.with(user: self).welcome_email.deliver_later }
 
   def self.from_google(u)
     create_with(uid: u[:uid], provider: 'google',
