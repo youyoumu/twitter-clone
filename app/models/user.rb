@@ -15,7 +15,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+         :omniauthable, omniauth_providers: [:google_oauth2]
   validates :username, uniqueness: { case_sensitive: false, message: 'username has already been taken' },
                        length: { minimum: 4, maximum: 15, message: 'username must be between 4 and 15 characters' },
                        format: { with: /\A[a-zA-Z0-9_]+\z/,
@@ -41,4 +42,10 @@ class User < ApplicationRecord
   validates :bio, length: { maximum: 140, message: 'must be less than 140 characters' }
 
   after_create -> { UserMailer.with(user: self).welcome_email.deliver_later }
+
+  def self.from_google(u)
+    create_with(uid: u[:uid], provider: 'google',
+                username: "user_#{User.last.id + 1}",
+                password: Devise.friendly_token[0, 20]).find_or_create_by!(email: u[:email])
+  end
 end

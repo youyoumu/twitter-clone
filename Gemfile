@@ -78,5 +78,10 @@ gem 'sorbet-runtime'
 gem 'tapioca', require: false, group: %i[development test]
 
 gem 'active_storage_validations'
+gem 'letter_opener', group: :development
 gem 'ruby-vips', '>= 2.1.0'
-gem "letter_opener", group: :development
+
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
+
+gem 'dotenv-rails'
