@@ -1,0 +1,25 @@
+<div class="card mb-4" >
+  <div class="card-body">
+    <div class="card-title d-flex justify-content-between">
+      <div class="d-flex">
+        <div class="me-3">
+          <%= image_tag "no_avatar.svg", alt: 'no_avatar.svg', heigth: '64', width: '64', style: "object-fit: cover", class: "rounded-circle" %>
+        </div>
+        <%= link_to tweet.user.username, user_path(tweet.user), class: "fs-4 fw-bold", data: { turbo_frame: "_top" } %>
+      </div>
+      <span class="fs-6 text-body-secondary"><%= tweet.created_at %></span>
+    </div>
+    <p class="fs-5"> <%= tweet.content %></p>
+    <% if tweet.tweet_pic.attached? %>
+      <%= image_tag tweet.tweet_pic, alt: 'tweet_pic', style: "object-fit: cover; max-height: 600px; width: 100%;", class: "mb-3"%>
+    <% end %>
+    <div class="d-flex">
+      <div class="input-group mb-1" data-controller="like">
+        <%= link_to likes_count[tweet.id].nil? ? 0 : likes_count[tweet.id], tweet_like_path(tweet), class: "input-group-text text-decoration-none", "data-like-target": "likeCount", data: { turbo_frame: "_top" } %>
+        <%= link_to 'Unlike', tweet_like_path(tweet),data: {turbo_method: :delete, turbo_frame: "_top"}, class: "btn btn-outline-danger", hidden: true, "data-action": "like#unlike", "data-like-target": "unlikeButton" %>
+        <%= link_to 'Like', tweet_like_path(tweet),data: {turbo_method: :post, turbo_frame: "_top"}, class: "btn btn-outline-primary", hidden: false, "data-action": "like#like", "data-like-target": "likeButton" %>
+      </div>
+      <%= link_to 'Reply', tweet_path(tweet), class: "btn btn-primary ms-2", data: { turbo_frame: "_top" } %>
+    </div>
+  </div>
+</div>
