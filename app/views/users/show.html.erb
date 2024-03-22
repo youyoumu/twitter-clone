@@ -28,6 +28,7 @@
 </div>
 <% unless @user.tweets.empty? %>
   <h2>Tweets</h2>
+  <%= turbo_stream_from :tweets_stream %>
   <%= turbo_frame_tag(:tweets_container) do %>
     <%= turbo_frame_tag([:tweets, 1], src: page_path(last_tweet_id: @last_tweet_id, user_id: @user.id)) do %>
       <div class="d-flex justify-content-center m-5">
