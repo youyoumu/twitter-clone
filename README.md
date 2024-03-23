@@ -1,24 +1,63 @@
-# README
+# Twitter Clone
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project is a Twitter clone application built with Ruby on Rails as part of the final project in The Odin Project's Ruby on Rails course. The goal of this project is to create a simplified version of the popular social media platform, Twitter, where users can sign up, create profiles, post tweets, follow other users, and interact with their posts. link to the course [here](https://www.theodinproject.com/lessons/ruby-on-rails-rails-final-project)
 
-Things you may want to cover:
+## Feature
 
-* Ruby version
+- Sign up and create a new account
+- Sign in with Google
+- Log in and log out securely
+- Create and edit their user profile with avatar and bio
+- Compose and publish new tweets with picture
+- View a timeline of tweets from users
+- Like other users' tweets
+- Follow and unfollow other users
 
-* System dependencies
+## Technology Used
 
-* Configuration
+- Ruby on Rails
+- PostgreSQL
+- Bootstrap
 
-* Database creation
+## Dependencies
 
-* Database initialization
+- Ruby version 3.2.2
+- Postgresql
+- libvips
+- Yarn
+- Redis
 
-* How to run the test suite
+## Installation
 
-* Services (job queues, cache servers, search engines, etc.)
+Clone this repository
+```
+git clone git@github.com:youyoumu/twitter-clone.git
+cd twitter-clone
+```
+Install required gem
+```
+bundle install
+```
+Setup database
+```
+rails db:create
+rails db:migrate
+```
+Precompile assets
+```
+rails assets:precompile
+```
 
-* Deployment instructions
+## Usage
+To run the app in development enviroment
+```
+rails server
+```
 
-* ...
+## Configuration
+To use Google oauth2, create `.env` in project root directory to set your `CLIENT ID` and `CLIENT SECRET`
+```
+GOOGLE_OAUTH_CLIENT_ID=<your_client_id>
+GOOGLE_OAUTH_CLIENT_SECRET=<your_client_secret>
+```
+
