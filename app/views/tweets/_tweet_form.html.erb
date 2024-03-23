@@ -4,7 +4,7 @@
     <%= f.text_area :content, class: "form-control mb-2", "data-action": "character-count#update", "data-character-count-target": "textarea" %>
     <div class="text-secondary p-1", data-character-count-target="counter"></div>
   </div>
-  <div class="input-group">
+  <div class="input-group mb-4">
     <%= f.file_field :tweet_pic, class: "form-control" %>
     <%= f.submit "Tweet", class: "btn btn-primary" %>
   </div>
