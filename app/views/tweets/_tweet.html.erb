@@ -11,7 +11,7 @@
         </div>
         <%= link_to tweet.user.username, user_path(tweet.user), class: "fs-4 fw-bold", data: { turbo_frame: "_top" } %>
       </div>
-      <span class="fs-6 text-body-secondary"><%= tweet.created_at %></span>
+      <span class="fs-6 text-body-secondary"><%= local_time_ago(tweet.created_at) %></span>
     </div>
     <p class="fs-5"> <%= tweet.content %></p>
     <% if tweet.tweet_pic.attached? %>
