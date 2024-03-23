@@ -13,6 +13,14 @@ This project is a Twitter clone application built with Ruby on Rails as part of 
 - Like other users' tweets
 - Follow and unfollow other users
 
+### Future plan
+- [ ] Direct message
+- [ ] Tag/mention other users
+- [ ] Notification
+- [ ] Sign in with username
+- [ ] Forget/reset user password
+- [ ] Change user password
+
 ## Technology Used
 
 - Ruby on Rails
